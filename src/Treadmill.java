@@ -10,6 +10,7 @@ class Treadmill implements Obstacle {
         return participant.run(length.getLength());
     }
 
+    @Override
     public String getDescription() {
         return "Дорожка " + length.getLength() + " м";
     }

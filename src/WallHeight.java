@@ -7,7 +7,6 @@ enum WallHeight {
     WallHeight(int height) {
         this.height = height;
     }
-
     public int getHeight() {
         return height;
     }
