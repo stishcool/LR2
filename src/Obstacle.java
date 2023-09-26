@@ -1,4 +1,4 @@
-// Общий интерфейс для участников и препятствий
-public interface Obstacle {
+interface Obstacle {
     boolean pass(Participant participant);
+    String getDescription();
 }

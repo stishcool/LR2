@@ -6,33 +6,22 @@ public class Main {
         Robot robot = new Robot("Робот");
 
         // Создаем препятствия
-        Treadmill treadmill1 = new Treadmill(500);
-        Wall wall1 = new Wall(1);
-        Treadmill treadmill2 = new Treadmill(1000);
-        Wall wall2 = new Wall(2);
-
-        // Массив участников и препятствий
-        Participant[] participants = {human, cat, robot};
-        Obstacle[] obstacles = {treadmill1, wall1, treadmill2, wall2};
+        Obstacle[] obstacles = {
+                new Treadmill(TreadmillLength.LENGTH_500),
+                new Wall(WallHeight.HEIGHT_1),
+                new Treadmill(TreadmillLength.LENGTH_1000),
+                new Wall(WallHeight.HEIGHT_2)
+        };
 
         // Проходим препятствия
-        for (Participant participant : participants) {
+        for (Participant participant : new Participant[]{human, cat, robot}) {
             System.out.println("Участник: " + participant.getName());
             for (Obstacle obstacle : obstacles) {
-                if (obstacle instanceof Treadmill) {
-                    if (participant.run(((Treadmill) obstacle).getLength())) {
-                        System.out.println("Успешно пробежал дорожку длиной " + ((Treadmill) obstacle).getLength());
-                    } else {
-                        System.out.println("Не смог пробежать дорожку длиной " + ((Treadmill) obstacle).getLength());
-                        break; // Если не смог пройти, прекращаем дальнейшие попытки
-                    }
-                } else if (obstacle instanceof Wall) {
-                    if (participant.jump(((Wall) obstacle).getHeight())) {
-                        System.out.println("Успешно перепрыгнул стену высотой " + ((Wall) obstacle).getHeight());
-                    } else {
-                        System.out.println("Не смог перепрыгнуть стену высотой " + ((Wall) obstacle).getHeight());
-                        break; // Если не смог пройти, прекращаем дальнейшие попытки
-                    }
+                if (obstacle.pass(participant)) {
+                    System.out.println(obstacle.getDescription() + " - Успешно");
+                } else {
+                    System.out.println(obstacle.getDescription() + " - Не смог");
+                    break; // Если не смог пройти, прекращаем дальнейшие попытки
                 }
             }
             System.out.println();

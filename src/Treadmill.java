@@ -1,16 +1,16 @@
 class Treadmill implements Obstacle {
-    private int length;
+    private TreadmillLength length;
 
-    public Treadmill(int length) {
+    public Treadmill(TreadmillLength length) {
         this.length = length;
-    }
-
-    public int getLength() {
-        return length;
     }
 
     @Override
     public boolean pass(Participant participant) {
-        return participant.run(length);
+        return participant.run(length.getLength());
+    }
+
+    public String getDescription() {
+        return "Дорожка " + length.getLength() + " м";
     }
 }
